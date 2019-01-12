@@ -1,0 +1,20 @@
+
+
+如何开启权限注解
+1、集成对应的spring-aop功能
+<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-aop</artifactId>
+</dependency>
+
+2、开启class动态代理功能
+@EnableAspectJAutoProxy(proxyTargetClass=true)
+
+3、创建AuthorizationAttributeSourceAdvisor类的Bean
+@Bean
+public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
+    AuthorizationAttributeSourceAdvisor advisor =  new AuthorizationAttributeSourceAdvisor();
+    advisor.setSecurityManager(securityManager);
+    return advisor;
+}
